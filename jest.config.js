@@ -4,6 +4,6 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   transform: {
-    '.+\\ts$': ['ts-jest']
+    '^.+\\.[tj]sx?$': ['ts-jest']
   }
 }
