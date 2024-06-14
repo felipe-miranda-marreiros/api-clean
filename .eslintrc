@@ -1,0 +1,14 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  "parserOptions": { "ecmaVersion": 2018, "sourceType": "module" },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "prettier/prettier": 0,
+    "no-unused-vars": "error",
+    "no-nested-ternary": "error",
+    "no-magic-numbers": "error",
+    "import/order": [1, { "groups": ["external", "builtin", "internal", "sibling", "parent", "index"] }]
+  },
+  "plugins": ["import"]
+}
