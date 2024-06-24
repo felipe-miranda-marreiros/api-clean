@@ -5,7 +5,14 @@
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "error",
     "prettier/prettier": 0,
-    "no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
     "no-nested-ternary": "error",
     "no-magic-numbers": "error",
     "import/order": [1, { "groups": ["external", "builtin", "internal", "sibling", "parent", "index"] }]
