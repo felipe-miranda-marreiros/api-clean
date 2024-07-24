@@ -1,8 +1,10 @@
-export interface HttpResponse<TResponse = unknown> {
+export interface HttpResponse {
   statusCode: number
-  body: TResponse
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any
 }
 
-export interface HttpRequest<TRequest = unknown> {
-  body?: TRequest
+export interface HttpRequest {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body?: any
 }
