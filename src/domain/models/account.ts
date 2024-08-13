@@ -1,5 +1,6 @@
-import { AddAccountModel } from '../usecases/add-account'
-
-export interface AccountModel extends AddAccountModel {
+export interface AccountModel {
   id: string
+  name: string
+  email: string
+  password: string
 }

@@ -7,6 +7,13 @@ export function adapteRoute(controller: Controller) {
       body: req.body
     }
     const httpResponse = await controller.handle(httpRequest)
-    res.status(httpResponse.statusCode).json(httpResponse.body)
+    res.status(httpResponse.statusCode).json(
+      httpResponse.body instanceof Error
+        ? {
+            name: httpResponse.body.name,
+            stack: httpResponse.body.message
+          }
+        : httpResponse.body
+    )
   }
 }

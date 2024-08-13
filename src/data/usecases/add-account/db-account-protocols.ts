@@ -1,3 +1,3 @@
-export * from '../../protocols/encrypter'
+export * from '../../protocols/criptography/hasher'
 export { AccountModel, AddAccount, AddAccountModel } from '@/domain'
-export * from '../../protocols/add-account-repository'
+export * from '../../protocols/db/add-account-repository'
