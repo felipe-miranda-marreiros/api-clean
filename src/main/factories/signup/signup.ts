@@ -1,7 +1,7 @@
 import { makeSignUpValidation } from './signup-validation'
 import { DbAddAccount } from '@/data/usecases/add-account/db-add-account'
 import { LogMongoRepository } from '@/infra'
-import { BcryptAdapter } from '@/infra/criptography/bcrypt-adapter'
+import { BcryptAdapter } from '@/infra/criptography/bcrypter-adapter/bcrypt-adapter'
 import { AccountMongoRepository } from '@/infra/db/mongodb/account-repository/account'
 import { LogControllerDecorator } from '@/main/decorators/log'
 import { SignUpController } from '@/presentation/controllers/signup/signup'
