@@ -1,4 +1,4 @@
-import { LogControllerDecorator } from './log'
+import { LogControllerDecorator } from './log-controller-decorator'
 import { LogErrorRepository } from '@/data'
 import { AccountModel } from '@/domain'
 import { ok, serverError } from '@/presentation'

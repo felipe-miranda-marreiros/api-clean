@@ -1,7 +1,7 @@
 import { Encrypter } from '@/data/protocols/criptography/encrypter'
 import { HashComparer } from '@/data/protocols/criptography/hash-comparer'
-import { LoadAccountByEmailRepository } from '@/data/protocols/db/load-account-by-email-repository'
-import { UpdateAccessTokenRepository } from '@/data/protocols/db/update-access-token-repository'
+import { LoadAccountByEmailRepository } from '@/data/protocols/db/account/load-account-by-email-repository'
+import { UpdateAccessTokenRepository } from '@/data/protocols/db/account/update-access-token-repository'
 import { Authentication, AuthenticationModel } from '@/domain'
 
 export class DbAuthentication implements Authentication {
@@ -13,13 +13,13 @@ export class DbAuthentication implements Authentication {
   ) {}
 
   async auth(authentication: AuthenticationModel): Promise<string | null> {
-    const account = await this.loadAccountByEmailRepository.load(authentication.email)
+    const account = await this.loadAccountByEmailRepository.loadByEmail(authentication.email)
 
     if (account) {
       const isValid = await this.hashComparer.compare(authentication.password, account.password)
       if (isValid) {
         const accessToken = await this.tokenGenerator.encrypt(account.id)
-        await this.updateAccessTokenRepository.update(account.id, accessToken)
+        await this.updateAccessTokenRepository.updateAccessToken(account.id, accessToken)
         return accessToken
       }
     }
