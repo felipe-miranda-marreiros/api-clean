@@ -5,11 +5,19 @@ export const BAD_REQUEST = 400
 export const SERVER_ERROR = 500
 export const SUCCESS = 200
 export const UNAUTHORIZED = 401
+export const FORBBIDEN = 403
 
 export function unauthorized(): HttpResponse {
   return {
     statusCode: UNAUTHORIZED,
     body: new UnAuthorizedError()
+  }
+}
+
+export function forbbiden(error: Error): HttpResponse {
+  return {
+    statusCode: FORBBIDEN,
+    body: error
   }
 }
 

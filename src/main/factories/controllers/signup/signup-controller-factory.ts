@@ -1,0 +1,12 @@
+import { makeSignUpValidation } from './signup-validation-factory'
+import { makeDbAuthentication } from '../../usecases/authentication/db-authentication-factory'
+import { makeDBAddAccount } from '../../usecases/add-account/db-add-account-factory'
+import { makeLogControllerDecorator } from '../../decorators/log-controller-decorator-factory'
+import { SignUpController } from '@/presentation/controllers/signup/signup-controller'
+import { Controller } from '@/presentation/protocols'
+
+export function makeSignUpController(): Controller {
+  return makeLogControllerDecorator(
+    new SignUpController(makeDBAddAccount(), makeSignUpValidation(), makeDbAuthentication())
+  )
+}
