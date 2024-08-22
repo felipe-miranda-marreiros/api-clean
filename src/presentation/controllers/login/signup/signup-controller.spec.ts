@@ -1,7 +1,7 @@
 import { SignUpController } from './signup-controller'
 import { AccountModel, AddAccount, AddAccountModel, HttpRequest, Validation } from './signup-controller-protocols'
-import { EmailInUseError, MissingParamError, ServerError } from '../../errors'
-import { badRequest, forbbiden, ok, serverError } from '../../helpers/http/http-helpers'
+import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
+import { badRequest, forbbiden, ok, serverError } from '../../../helpers/http/http-helpers'
 import { Authentication, AuthenticationModel } from '@/domain'
 
 function makeAddAccount(): AddAccount {

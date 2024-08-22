@@ -6,11 +6,19 @@ export const SERVER_ERROR = 500
 export const SUCCESS = 200
 export const UNAUTHORIZED = 401
 export const FORBBIDEN = 403
+export const NO_CONTENT = 403
 
 export function unauthorized(): HttpResponse {
   return {
     statusCode: UNAUTHORIZED,
     body: new UnAuthorizedError()
+  }
+}
+
+export function noContent(): HttpResponse {
+  return {
+    statusCode: NO_CONTENT,
+    body: null
   }
 }
 
