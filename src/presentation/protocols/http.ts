@@ -7,4 +7,6 @@ export interface HttpResponse {
 export interface HttpRequest {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   body?: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  headers?: any
 }
