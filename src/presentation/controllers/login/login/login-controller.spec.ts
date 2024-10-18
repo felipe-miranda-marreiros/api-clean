@@ -1,7 +1,12 @@
 import { LoginController } from './login-controller'
-import { Authentication, AuthenticationModel, HttpRequest, Validation } from './login-controller-protocols'
+import {
+  Authentication,
+  AuthenticationModel,
+  HttpRequest,
+  HttpResponse,
+  Validation
+} from './login-controller-protocols'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http/http-helpers'
-import { MissingParamError } from '@/presentation/errors'
 
 function makeAuthentication(): Authentication {
   class AuthenticationStub implements Authentication {
@@ -23,7 +28,7 @@ function makeFakeRequest(): HttpRequest {
 
 function makeValidation(): Validation {
   class ValidationStub implements Validation {
-    validate(): Error | null {
+    validate<T>(_: T): HttpResponse | null {
       return null
     }
   }
@@ -84,8 +89,8 @@ describe('Login Controller', () => {
   })
   test('Should return 400 if validation returns an error', async () => {
     const { sut, validationStub } = makeSut()
-    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce({ body: [], statusCode: 400 })
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+    expect(httpResponse).toEqual(badRequest({ errors: [] }))
   })
 })

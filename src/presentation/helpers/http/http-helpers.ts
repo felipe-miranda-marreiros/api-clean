@@ -1,5 +1,6 @@
 import { ServerError, UnAuthorizedError } from '../../errors'
 import { HttpResponse } from '../../protocols/http'
+import { ValidationError } from '@/presentation/protocols/validation'
 
 export const BAD_REQUEST = 400
 export const SERVER_ERROR = 500
@@ -29,10 +30,10 @@ export function forbbiden(error: Error): HttpResponse {
   }
 }
 
-export function badRequest(error: Error): HttpResponse {
+export function badRequest(error: ValidationError): HttpResponse {
   return {
     statusCode: BAD_REQUEST,
-    body: error
+    body: error.errors
   }
 }
 

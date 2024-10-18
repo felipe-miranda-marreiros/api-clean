@@ -1,6 +1,13 @@
 import { SignUpController } from './signup-controller'
-import { AccountModel, AddAccount, AddAccountModel, HttpRequest, Validation } from './signup-controller-protocols'
-import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
+import {
+  AccountModel,
+  AddAccount,
+  AddAccountModel,
+  HttpRequest,
+  HttpResponse,
+  Validation
+} from './signup-controller-protocols'
+import { EmailInUseError, ServerError } from '../../../errors'
 import { badRequest, forbbiden, ok, serverError } from '../../../helpers/http/http-helpers'
 import { Authentication, AuthenticationModel } from '@/domain'
 
@@ -15,7 +22,7 @@ function makeAddAccount(): AddAccount {
 
 function makeValidation(): Validation {
   class ValidationStub implements Validation {
-    validate(): Error | null {
+    validate<T>(_: T): HttpResponse | null {
       return null
     }
   }
@@ -101,9 +108,9 @@ describe('SignUp Controller', () => {
   })
   test('Should return 400 if validation returns an error', async () => {
     const { sut, validationStub } = makeSut()
-    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce({ body: [], statusCode: 400 })
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+    expect(httpResponse).toEqual(badRequest({ errors: [] }))
   })
 
   test('Should call Authentication with correct values', async () => {

@@ -14,7 +14,6 @@
       }
     ],
     "no-nested-ternary": "error",
-    "no-magic-numbers": "error",
     "import/order": [1, { "groups": ["external", "builtin", "internal", "sibling", "parent", "index"] }]
   },
   "plugins": ["import"]

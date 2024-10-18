@@ -1,6 +1,5 @@
 import {
   AddSurvey,
-  badRequest,
   Controller,
   HttpRequest,
   HttpResponse,
@@ -20,7 +19,7 @@ export class AddSurveyController implements Controller {
       const error = this.validation.validate(httpRequest.body)
 
       if (error) {
-        return badRequest(error)
+        return error
       }
 
       const { question, answers } = httpRequest.body

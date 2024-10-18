@@ -1,5 +1,5 @@
 import { AddAccount, Controller, HttpRequest, HttpResponse, Validation } from './signup-controller-protocols'
-import { badRequest, forbbiden, ok, serverError } from '../../../helpers/http/http-helpers'
+import { forbbiden, ok, serverError } from '../../../helpers/http/http-helpers'
 import { Authentication } from '@/domain'
 import { EmailInUseError } from '@/presentation/errors'
 
@@ -15,7 +15,7 @@ export class SignUpController implements Controller {
       const error = this.validation.validate(httpRequest.body)
 
       if (error) {
-        return badRequest(error)
+        return error
       }
 
       const { email, password, name } = httpRequest.body
